@@ -1,0 +1,9 @@
+@echo off
+echo Setting up local standalone Redis server...
+if not exist redis (
+    echo Redis folder not found. Downloading standalone Redis for Windows...
+    powershell -Command "Invoke-WebRequest -Uri 'https://github.com/tporadowski/redis/releases/download/v5.0.14.1/Redis-x64-5.0.14.1.zip' -OutFile 'redis.zip'; Expand-Archive -Path 'redis.zip' -DestinationPath 'redis'; Remove-Item 'redis.zip'"
+)
+echo Starting Redis Server on localhost:6379...
+cd redis
+redis-server.exe
